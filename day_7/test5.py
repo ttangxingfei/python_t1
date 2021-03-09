@@ -1,0 +1,15 @@
+str1 = 'hello, world!'
+print(len(str1))
+print(str1.capitalize())
+print(str1.title())
+print(str1.upper())
+print(str1.find('or'))
+print(str1.find('shit'))
+print(str1.startswith('He'))
+print(str1.startswith('hel'))
+print(str1.endswith('!'))
+print(str1.center(50, '*'))
+print(str1.rjust(50, ' '))
+str3 = ' jackfrueed@126.com'
+print(str3)
+print(str3.strip())
