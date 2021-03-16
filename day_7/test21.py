@@ -12,12 +12,12 @@ def select_ball():
     s_ball = []
     s_ball = sample(red_ball, 6)
     s_ball.sort()
-    s_ball.append(randint(1,16))
+    s_ball.append(randint(1, 14))
     return s_ball
 
 def main():
-    num_zhu = int(input('机选几注： '))
-    for _ in range(num_zhu):
+    zhu_num = int(input('机选几注： '))
+    for _ in range(zhu_num):
         display(select_ball())
 
 if __name__ == '__main__':
