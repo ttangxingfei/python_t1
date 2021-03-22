@@ -1,8 +1,8 @@
-from time import sleep
+from time import localtime, time, sleep
 
 class Clock(object):
 
-    def __init__(self, hour=0, minute=0, second=0):
+    def __init__(self, hour, minute, second):
         self.hour = hour
         self.minute = minute
         self.second = second
@@ -17,16 +17,23 @@ class Clock(object):
                 if self.hour == 24:
                     self.hour = 0
 
+    @classmethod
+    def now(cls):
+        ctime = localtime(time())
+        return cls(ctime.tm_hour, ctime.tm_min, ctime.tm_sec)
+
     def display(self):
-        return '%02d:%02d:%02d'%(self.hour, self.minute, self.second)
+        return "%02d:%02d:%02d" % (self.hour, self.minute, self.second)
 
 
 def main():
-    clock = Clock(23, 59, 59)
+    clock = Clock.now()
     while True:
         print(clock.display())
         sleep(1)
+        clock.second += 1
         clock.run()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
