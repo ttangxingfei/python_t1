@@ -1,9 +1,10 @@
 from abc import ABCMeta, abstractmethod
 from random import randint, randrange
 
-class Fighter(object, metaclass=ABCMeta):
 
-    __slot__ = ('_name', '_hp')
+class Fighter(object, metaclass=ABCMeta):
+    __slots__ = ('_name', '_hp')
+
     def __init__(self, name, hp):
         self._name = name
         self._hp = hp
@@ -11,7 +12,7 @@ class Fighter(object, metaclass=ABCMeta):
     @property
     def name(self):
         return self._name
-    
+
     @property
     def hp(self):
         return self._hp
@@ -65,16 +66,17 @@ class Ultraman(Fighter):
         return incr_point
 
     def __str__(self):
-        return '~~~%S奥特曼~~~\n'%self._name + '生命值：%d\n'%self._hp + '魔法值：%d\n'%self._mp
+        return '~~~%s奥特曼~~~\n'%self._name + '生命值：%d\n'%self._hp + '魔法值：%d\n'%self._mp
 
 
-class Monster(Fihgter):
+class Monster(Fighter):
     __slots__ = ('_name', '_hp')
     def attack(self, other):
         other.hp -= randint(10, 20)
 
     def __str__(self):
         return '~~~%s小怪兽~~~\n'%self._name + '生命值：%d\n'%self._hp
+
 
 def is_any_alive(monsters):
     for monster in monsters:
@@ -84,8 +86,23 @@ def is_any_alive(monsters):
 
 def select_alive_one(monsters):
     monsters_len = len(monsters)
-    while True:
-        index = randrange(monsters_len)
-        monster = monsters[index]
-        if monster.alive > 0:
-            return monster
+    monster = monsters[index]
+    if monster.alive > 0:
+        return monster
+
+def display_info(ultraman, monsters):
+    print(ultraman)
+    for monster in monsters:
+        print(monster, end='')
+
+
+def main():
+    u = Ultraman('骆昊', 1000, 120)
+    m1 = Monster('狄仁杰', 250)
+    m2 = Monster('白元芳', 500)
+    m3 = Monster('王大锤', 750)
+    ms = [m1, m2, m3]
+    fight_round = 1
+    while u.alive and is_any_alive(ms):
+        print('======第%02d回合======'%fight_round)
+        m = select_alive_one(ms)
